@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Challenge — WordVault</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3989179117356133" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <header>
+    <a href="index.html" class="logo" style="text-decoration:none;">WORDVAULT</a>
+    <div class="header-right">
+      <div id="authArea"></div>
+    </div>
+  </header>
+
+  <main style="max-width:520px;">
+    <section class="hero">
+      <h1>Daily Challenge</h1>
+      <p class="sub" id="dateLabel">Loading today's challenge...</p>
+    </section>
+
+    <div class="input-card" id="challengeCard" style="display:none;">
+      <div class="hint-box">
+        <div class="hint-item">
+          <span class="hint-label">First letter</span>
+          <span class="hint-value" id="hintLetter">—</span>
+        </div>
+        <div class="hint-divider"></div>
+        <div class="hint-item">
+          <span class="hint-label">Letters</span>
+          <span class="hint-value" id="hintLength">—</span>
+        </div>
+        <div class="hint-divider"></div>
+        <div class="hint-item">
+          <span class="hint-label">Solved by</span>
+          <span class="hint-value" id="hintSolved">—</span>
+        </div>
+      </div>
+
+      <div class="letter-display" id="letterDisplay"></div>
+
+      <div class="input-row" id="guessRow" style="margin-top:1rem;">
+        <input type="text" id="guessInput" placeholder="Type your guess..."
+          autocomplete="off" autocorrect="off" spellcheck="false" maxlength="45" />
+        <button id="guessBtn" onclick="submitGuess()">Guess</button>
+      </div>
+      <div id="guessResult"></div>
+    </div>
+
+    <div class="input-card" id="solvedCard" style="display:none;">
+      <div class="solved-box">
+        <div class="solved-icon">🏆</div>
+        <div class="solved-title">You solved it!</div>
+        <div class="solved-word" id="solvedWord"></div>
+        <div class="solved-sub">A daily trophy has been added to your Trophy Room.</div>
+      </div>
+    </div>
+
+    <div class="input-card" id="noChallenge" style="display:none;">
+      <p style="color:var(--text-muted);font-size:14px;text-align:center;padding:1rem 0;">
+        No daily challenge today. Check back tomorrow!
+      </p>
+    </div>
+
+    <div class="input-card" id="guestNotice" style="display:none;">
+      <p style="color:var(--text-muted);font-size:14px;text-align:center;padding:0.5rem 0;">
+        <a href="index.html" style="color:var(--gold);">Log in</a> to save your daily trophy permanently.
+      </p>
+    </div>
+  </main>
+
+  <!-- Admin Modal -->
+  <div class="modal-wrap" id="adminModal">
+    <div class="modal">
+      <button class="close-btn modal-close" onclick="closeAdminModal()">✕</button>
+      <div class="modal-logo">ADMIN</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;text-align:center;">Set today's daily word</p>
+      <input class="modal-input" type="password" id="adminPassword" placeholder="Admin password" />
+      <input class="modal-input" type="text" id="adminWord" placeholder="Word (must exist on main page)" />
+      <input class="modal-input" type="date" id="adminDate" />
+      <div class="modal-error" id="adminError"></div>
+      <button class="modal-submit" onclick="setDailyWord()">Set word</button>
+    </div>
+  </div>
+
+  <!-- Secret admin button — only visible if you know to look -->
+  <button onclick="openAdminModal()" style="position:fixed;bottom:12px;right:12px;background:transparent;border:none;opacity:0.15;cursor:pointer;font-size:11px;color:var(--white);">⚙</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="daily.js"></script>
+</body>
+</html>
